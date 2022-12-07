@@ -73,7 +73,7 @@ function moveUser(e) {
       }
       break;
     case "ArrowUp":
-      if (currentPosition[1] < 80) {
+      if (currentPosition[1] < 40) {
         currentPosition[1] += 10;
         // console.log(currentPosition);
         drawUser();
