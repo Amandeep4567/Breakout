@@ -48,6 +48,45 @@ addBlocks();
 
 const user = document.createElement("div");
 user.classList.add("user");
-user.style.left = currentPosition[0] + "px";
-user.style.bottom = currentPosition[1] + "px";
+drawUser();
 grid.appendChild(user);
+
+// draw the user
+function drawUser() {
+  user.style.left = currentPosition[0] + "px";
+  user.style.bottom = currentPosition[1] + "px";
+}
+function moveUser(e) {
+  switch (e.key) {
+    case "ArrowLeft":
+      if (currentPosition[0] > 0) {
+        currentPosition[0] -= 10;
+        // console.log(currentPosition);
+        drawUser();
+      }
+      break;
+    case "ArrowRight":
+      if (currentPosition[0] < 460) {
+        currentPosition[0] += 10;
+        // console.log(currentPosition);
+        drawUser();
+      }
+      break;
+    case "ArrowUp":
+      if (currentPosition[1] < 80) {
+        currentPosition[1] += 10;
+        // console.log(currentPosition);
+        drawUser();
+      }
+      break;
+    case "ArrowDown":
+      if (currentPosition[1] > 10) {
+        currentPosition[1] -= 10;
+        // console.log(currentPosition);
+        drawUser();
+      }
+      break;
+  }
+}
+
+document.addEventListener("keydown", moveUser);
