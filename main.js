@@ -1,3 +1,5 @@
+"use strict";
+
 const grid = document.querySelector(".grid");
 const scoreDisplay = document.querySelector("#score");
 const blockWidth = 100;
@@ -7,6 +9,7 @@ const boardHeight = 300;
 let timerId;
 let xDirection = -2;
 let yDirection = 2;
+let score = 0;
 
 const userStart = [230, 10];
 let currentPosition = userStart;
@@ -136,6 +139,15 @@ function checkForCollisions() {
       allBlocks[i].classList.remove("block");
       blocks.splice(i, 1);
       changeDirection();
+      score++;
+      scoreDisplay.textContent = score;
+
+      // check for win
+      if (blocks.length === 0) {
+        scoreDisplay.textContent = "YOU WIN";
+        clearInterval(timerId);
+        document.removeEventListener("keydown", moveUser);
+      }
     }
   }
 
@@ -148,8 +160,17 @@ function checkForCollisions() {
     changeDirection();
   }
 
-  // check for game over
+  // check for user collisions
+  if (
+    ballCurrentPosition[0] > currentPosition[0] &&
+    ballCurrentPosition[0] < currentPosition[0] + blockWidth &&
+    ballCurrentPosition[1] > currentPosition[1] &&
+    ballCurrentPosition[1] < currentPosition[1] + blockHeight
+  ) {
+    changeDirection();
+  }
   if (ballCurrentPosition[1] <= 0) {
+    // check for game over
     clearInterval(timerId);
     scoreDisplay.textContent = "You lose";
     document.removeEventListener("keydown", moveUser);
