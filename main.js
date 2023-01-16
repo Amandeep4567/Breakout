@@ -168,10 +168,10 @@ function checkForCollisions() {
       changeDirection();
       score++;
       scoreDisplay.textContent = score;
-      // if (score === 2) {
-      //   setInterval(moveBall, 15);
-      // }
 
+      if (score === 10) {
+        setInterval(moveBall, 25);
+      }
       // check for win
       if (blocks.length === 0) {
         resultDisplay.textContent = "YOU WIN";
